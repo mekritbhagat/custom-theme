@@ -1,0 +1,203 @@
+/* You can add global styles to this file, and also import other style files */
+//@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$candy-app-primary: mat-palette($mat-indigo);
+$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$candy-app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);
+
+// Define the default theme (same as the example above).
+$candy-app-primary: mat-palette($mat-indigo);
+$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
+
+// Include the default theme styles.
+@include angular-material-theme($candy-app-theme);
+
+
+// Define an alternate dark theme.
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+// Include the alternative theme styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
+.unicorn-dark-theme {
+  @include angular-material-theme($dark-theme);
+}
+
+// Define the theme.
+$candy-app-primary: mat-palette($mat-indigo);
+$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
+
+// Include the theme styles for only specified components.
+@include mat-core-theme($candy-app-theme);
+@include mat-button-theme($candy-app-theme);
+@include mat-checkbox-theme($candy-app-theme);
+
+
+.alternate-button {
+    @include mat-button-theme($alternate-theme);
+}
+
+// @import '~angular/material/theming';
+// @include mat-core();
+@mixin global-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+
+    .content {
+        background-color: mat-color($background, background);
+        color: mat-color($foreground, text);
+    }
+
+    a {
+        color: mat-color(primary);
+    }
+}
+
+@mixin candy-carousel-theme($theme) {
+    // Extract the palettes you need from the theme definition.
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+  
+    // Define any styles affected by the theme.
+    .candy-carousel {
+      // Use mat-color to extract individual colors from a palette.
+      background-color: mat-color($primary);
+      border-color: mat-color($accent, A400);
+    }
+}
+
+
+$default-theme: mat-light-theme(mat-pallete($mat-grey), mat-pallete($mat-amber), mat-pallete($mat-red));
+$dark-theme: mat-dark-theme(mat-pallete($mat-purple), mat-pallete($mat-blue), mat-pallete($mat-red));
+
+.candy-carousel {
+    // Get the default hue for a palette.
+    color: mat-color($primary);
+  
+    // Get a specific hue for a palette. 
+    // See https://material.io/archive/guidelines/style/color.html#color-color-palette for hues.
+    background-color: mat-color($accent, 300);
+  
+    // Get a relative color for a hue ('lighter' or 'darker')
+    outline-color: mat-color($accent, lighter);
+  
+    // Get a contrast color for a hue by adding `-contrast` to any other key.
+    border-color: mat-color($primary, '100-contrast');
+}
+
+.default-theme {
+    @include angular-material-theme($default-theme);
+}
+
+.dark-theme {
+    @include angular-material-theme($dark-theme);
+    @include global-theme($dark-theme);
+}
+
+$mat-myapp-primary: (
+    50 : #fbeded,
+    100 : #f6d1d1,
+    200 : #f0b3b3,
+    300 : #e99494,
+    400 : #e57d7d,
+    500 : #e06666,
+    600 : #dc5e5e,
+    700 : #d85353,
+    800 : #d34949,
+    900 : #cb3838,
+    A100 : #ffffff,
+    A200 : #ffe2e2,
+    A400 : #ffafaf,
+    A700 : #ff9696,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$mat-myapp-accent: (
+    50 : #fffaed,
+    100 : #fff4d1,
+    200 : #ffecb3,
+    300 : #ffe494,
+    400 : #ffdf7d,
+    500 : #ffd966,
+    600 : #ffd55e,
+    700 : #ffcf53,
+    800 : #ffca49,
+    900 : #ffc038,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #fff5e1,
+    A700 : #ffedc8,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$primary: mat-palette($mat-myapp-primary);
+$accent: mat-palette($mat-myapp-accent);
+
+$theme: mat-light-theme($primary, $accent);
+
+@include angular-material-theme($theme);
+
+body {
+    margin: 0;
+    height: 100vh;
+}
+
